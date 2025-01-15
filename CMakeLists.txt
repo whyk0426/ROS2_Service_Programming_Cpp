@@ -12,29 +12,19 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(example_interfaces REQUIRED)
+find_package(std_srvs REQUIRED)
 
-add_executable(double_talker src/p1_publisher.cpp)
-ament_target_dependencies(double_talker rclcpp std_msgs)
+add_executable(toggle_led_server src/toggle_LED_server.cpp)
+ament_target_dependencies(toggle_led_server rclcpp std_srvs)
 install(TARGETS
-  double_talker
+  toggle_led_server
   DESTINATION lib/${PROJECT_NAME})
-
-add_executable(double_listener src/p1_subscriber.cpp)
-ament_target_dependencies(double_listener rclcpp std_msgs)
+  
+add_executable(toggle_led_client src/toggle_LED_client.cpp)
+ament_target_dependencies(toggle_led_client rclcpp std_srvs)
 install(TARGETS
-  double_listener
-  DESTINATION lib/${PROJECT_NAME})
-
-add_executable(fast_agent src/p2_fast_agent.cpp)
-ament_target_dependencies(fast_agent rclcpp std_msgs)
-install(TARGETS
-  fast_agent
-  DESTINATION lib/${PROJECT_NAME})
-
-add_executable(slow_agent src/p2_slow_agent.cpp)
-ament_target_dependencies(slow_agent rclcpp std_msgs)
-install(TARGETS
-  slow_agent
+  toggle_led_client
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
